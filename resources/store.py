@@ -1,4 +1,3 @@
-import uuid
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
@@ -14,6 +13,7 @@ blp = Blueprint("stores", __name__, description="Operations on stores")
 
 @blp.route("/store/<string:store_id>")
 class Store(MethodView):
+    @blp.response(200,StoreSchema)
     def get(self,store_id):
         store = StoreModel.query.get_or_404(store_id)
         return store
